@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+		<title>imgExample</title>
+        <meta charset='utf-8' />
+	</head>
+	<body>
+		<canvas id='example'>Обновите браузер</canvas>
+		<script>
+			var example = document.getElementById("example"),
+			    ctx     = example.getContext('2d'),
+			    img = new Image(),
+          cellSize = 32,
+          map = [
+            [{x:1,y:4},{x:1,y:4},{x:1,y:4},{x:1,y:4},{x:1,y:4},{x:1,y:4},{x:1,y:4},{x:1,y:4}], // 1ый ряд
+           [{x:1,y:4},{x:1,y:1},{x:2,y:1},{x:3,y:1},{x:1,y:4},{x:1,y:4},{x:1,y:4},{x:1,y:4}], // 2ый ряд
+           [{x:1,y:4},{x:1,y:2},{x:2,y:2},{x:3,y:2},{x:1,y:4},{x:1,y:3},{x:1,y:3},{x:1,y:3}], // 3ый ряд
+           [{x:1,y:4},{x:3,y:4},{x:2,y:3},{x:3,y:4},{x:1,y:4},{x:1,y:3},{x:1,y:4},{x:1,y:4}], // 4ый ряд
+           [{x:1,y:4},{x:3,y:4},{x:2,y:4},{x:3,y:4},{x:1,y:4},{x:1,y:3},{x:1,y:4},{x:1,y:4}], // 5ый ряд
+           [{x:1,y:4},{x:1,y:4},{x:1,y:3},{x:1,y:4},{x:1,y:4},{x:1,y:3},{x:1,y:4},{x:1,y:4}], // 6ый ряд
+           [{x:1,y:4},{x:1,y:4},{x:1,y:3},{x:1,y:3},{x:1,y:3},{x:1,y:3},{x:1,y:3},{x:1,y:3}], // 7ый ряд
+           [{x:1,y:4},{x:1,y:4},{x:1,y:4},{x:1,y:4},{x:1,y:4},{x:1,y:4},{x:1,y:4},{x:1,y:4}],  // 8ый ряд
+           [{x:1,y:4},{x:1,y:4},{x:1,y:4},{x:1,y:4},{x:1,y:4},{x:1,y:4},{x:1,y:4},{x:1,y:4}]  // 9ый ряд
+         ];
+      example.width = map.length*cellSize;
+      example.height = map.length*cellSize;
+      img.src = 'image.png';
+      img.onload = function () {
+        // drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+        // Первый параметр указывает на изображение
+        // sx, sy, sWidth, sHeight указывают параметры фрагмента на изображение-источнике
+        // dx, dy, dWidth, dHeight ответственны за координаты отрисовки фрагмента на холсте
+        for (var j = 0; j<map.length; j++) {
+          for (var i = 0; i<map.length; i++) {
+            ctx.drawImage(img,  // изображение
+              (map[i][j].x-1)*cellSize, (map[i][j].y-1)*cellSize, cellSize, cellSize, // фрагменты
+              j*cellSize, i*cellSize, cellSize, cellSize); // отрисовка
+          }
+        }
+      }
+		</script>
+	</body>
+</html>
